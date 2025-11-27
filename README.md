@@ -43,19 +43,6 @@ Modern authentication UI built using **Alpine.js + Tailwind CSS**, featuring rea
 
 ---
 
-## 🗂 Project Structure
-/
-├── index.html # Login page
-├── signup.html # Signup page
-├── js/
-│ └── script.js # Alpine components & validation logic
-├── css/
-│ └── style.css # Optional custom styles
-└── img/
-├── logo.png
-├── login-page.png
-└── sign-up-page.png
-
 ## 📥 Installation
 
 1. Clone this repository:
