@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head> 
+<body>
+
+    <div class="flex min-h-screen">
+        
+        <!-- left side -->
+        <div class="w-1/2 bg-[#FF8844] relative flex items-center justify-center">
+            <div class="top-8 left-8 absolute">
+                <img src="img/logo.png" alt="logo" class="size-16">
+            </div>
+
+            <img src="img/sign-up-page.png" alt="login-page" class="max-w-lg w-4/5 h-auto">
+        </div>
+
+        <!-- right side-->
+        <div class="w-1/2 relative flex items-center justify-center">
+            <a href="index.html" class="top-10 left-10 absolute text-[#8692A6] hover:text-gray-300 text-sm">
+                <span class="text-lg mr-1.5">&lt;</span> Back
+            </a>
+
+            <div class="w-full max-w-sm p-8 mt-10">
+                <form x-data="signupForm" @submit.prevent="submitForm">
+
+                    <h3 class="font-bold text-2xl mb-2">Account Signup</h3> 
+                    <p class="text-[#8692A6] text-sm mb-6">
+                        Become a member and enjoy exclusive promotions.
+                    </p>
+
+                    <div class="mb-5">
+                        <label for="email-address" class="text-gray-500 text-sm">Full Name</label>
+                        <input type="text" id="email-address" class="outline-2 outline-offset-2 border p-2 w-full mt-2 outline-gray-600 border-gray-400 rounded-sm" x-model="fullName">
+                        <template x-if="errors.fullName">
+                            <p x-text="errors.fullName" class="text-sm text-red-500 italic mt-2"></p>
+                        </template>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="email-signup" class="text-gray-500 text-sm">Email address</label>
+                        <input type="email" id="email-signup" class="outline-2 outline-offset-2 border p-2 w-full mt-2 outline-gray-600 border-gray-400 rounded-sm" x-model="email">
+                        <template x-if="errors.email">
+                            <p x-text="errors.email" class="text-sm text-red-500 italic mt-2"></p>
+                        </template>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password-first" class="text-gray-500 text-sm">City</label>
+                        <div class="relative mt-2">
+                            
+                            <select x-model="city" class="custom-select-control border py-3 px-4 w-full outline-none border-gray-400 rounded-sm text-sm text-gray-700 focus:ring-black-500 focus:border-black-500 transition duration-150" id="custom-select-control">
+                                <option selected>Choose city</option>
+                                <template x-for="city in cities" :key="city">
+                                    <option :value="city" x-text="city"></option>
+                                </template>
+                            </select>
+
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <template x-if="errors.city">
+                            <p x-text="errors.city" class="text-sm text-red-500 italic mt-2"></p>
+                        </template>
+                        
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password-first" class="text-gray-500 text-sm">Password</label>
+                        <div class="relative mt-2">
+                            <input :type="showPassword ? 'text' : 'password'" id="password-first" class="outline-2 outline-offset-2 border p-2 w-full mt-2 outline-gray-600 border-gray-400 rounded-sm" x-model="password">
+                            
+                            <button 
+                                type="button" 
+                                @click="showPassword = !showPassword"
+                                class="absolute top-1/2 right-0 transform -translate-y-1/2 pr-3 text-gray-500 hover:text-gray-700 transition duration-150 mt-1"
+                            >
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">  
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" :d="eyePath()"></path>
+                                </svg>
+                            </button>
+
+                        </div>
+
+                        <template x-if="errors.password">
+                            <p x-text="errors.password" class="text-sm text-red-500 italic mt-2"></p>
+                        </template>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="password" class="text-gray-500 text-sm">Confirm Password</label>
+                        <input type="password" id="password" class="outline-2 outline-offset-2 border p-2 w-full mt-2 outline-gray-600 border-gray-400 rounded-sm" x-model="confirmPassword">
+                        <template x-if="errors.confirmPassword">
+                            <p x-text="errors.confirmPassword" class="text-sm text-red-500 italic mt-2"></p>
+                        </template>
+                    </div>
+
+                    <div class="mb-9">
+                        <button type="submit" class="outline-2 outline-offset-2 border p-4 w-full mt-2 outline-gray-600 border-gray-400 rounded-md text-xs bg-[#FF8844] text-white hover:bg-orange-400">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    
+</body>
+</html>
